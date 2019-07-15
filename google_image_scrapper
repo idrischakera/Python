@@ -1,0 +1,36 @@
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+import json
+import os
+import argparse
+
+searchterm = 'oil stain'
+url = "https://www.google.co.in/search?q="+searchterm+"&source=lnms&tbm=isch"
+browser = webdriver.Chrome(executable_path=r'C:\Users\u23e20\Downloads\chromedriver.exe')
+browser.get(url)
+CWD = os.getcwd()
+
+
+a1=[]
+for _ in range(500):
+    browser.execute_script("window.scrollBy(0,10000)")
+
+for x in browser.find_elements_by_xpath('//div[contains(@class,"rg_meta")]'):
+    url=json.loads(x.get_attribute('innerHTML'))["ou"]
+    if(url.find("(")==-1):
+        a1.append(url)
+
+#initializing filename
+ix=1 
+
+#downloading images
+for i in range(0,len(a1)):
+    print(i)
+    browser.get(a1[i])
+    filename = str(ix) + ".jpg"
+    with open(os.path.join(CWD, "Scraped", filename), 'wb') as file:
+        file.write(browser.find_element_by_xpath('/html/body/img').screenshot_as_png)
+    ix = ix + 1
+
+
+browser.close()
