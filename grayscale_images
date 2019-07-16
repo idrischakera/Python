@@ -1,0 +1,11 @@
+import numpy as np
+import cv2
+filenames = glob.glob("C:/Users/u23e20/Downloads/Flowchart recognition/*.jpg")
+filenames.sort()
+images = [cv2.imread(img) for img in filenames]
+i=1
+for img in images:
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    outfile = '%s/%s.jpg' % ("C:/Users/u23e20/Downloads/Flowchart recognition/grayscale images",i )
+    cv2.imwrite(outfile, gray)
+    i=i+1
