@@ -1,0 +1,11 @@
+i = 1
+
+for filename in os.listdir("C:/Users/u23e20/PycharmProjects/idris/rust images"):
+    dst = str(i) + ".jpg"
+    src = 'C:/Users/u23e20/PycharmProjects/idris/rust images/' + filename
+    dst = 'C:/Users/u23e20/PycharmProjects/idris/rust images/' + dst
+
+    # rename() function will
+    # rename all the files
+    os.rename(src, dst)
+    i += 1
